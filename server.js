@@ -5,6 +5,7 @@ const signup = require('./lib/signup')
 const event = require('./lib/event')
 const oauth = require('./lib/oauth')
 const bot = require('./lib/bot')
+const register = require('./lib/register')
 
 const client_id = process.env.SLACK_CLIENT_ID
 const server = restify.createServer()
@@ -41,6 +42,7 @@ server.post('/admin', admin)
 server.post('/signup', signup)
 server.post('/event', event)
 server.get('/oauth', oauth)
+server.get('/register', register)
 
 bot.listen()
 server.listen(process.env.PORT)
