@@ -44,7 +44,7 @@ server.post('/signup', signup)
 server.post('/event', event)
 server.get('/oauth', oauth)
 server.get('/register', register)
-server.get('/command', command)
+server.post('/command', command)
 
 bot.listen()
 server.listen(process.env.PORT)
