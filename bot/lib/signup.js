@@ -18,8 +18,8 @@ module.exports = function (req, res, next) {
     res.send(400, errors);
     return;
   }
- 
-  params.email = cleanseEmail(params); 
+
+  params.email = cleanseEmail(params);
 
   const client = storage()
   return client.hgetAsync('teams', params.team_id).then(function (json) {
@@ -65,7 +65,7 @@ function validateFields (params) {
   var errors = [];
   for (idx in required_fields) {
     var field = required_fields[idx];
-    if (!Object.prototype.hasOwnProperty(params, field) || !params[field] || !params[field].trim().length > 0) {
+    if (!Object.prototype.hasOwnProperty.call(params, field) || !params[field] || !params[field].trim().length > 0) {
       errors.push({ field: field, required: true, error: "Field is empty" });
     } else if (field == 'email' && !re_rfc5322.test(params[field])) {
       errors.push({ field: field, required: true, error: "Email failed RFC5322 validation" });
