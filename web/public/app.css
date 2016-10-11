@@ -14,7 +14,7 @@ header {
 .brand {
   height: 200px;
   width: 400px;
-  background-image: url(http://groovy-lang.org/img/groovy-logo-white.svg);
+  background-image: url("//groovy-lang.org/img/groovy-logo-white.svg");
   background-position: 0;
   background-size: contain;
   background-repeat: no-repeat;
