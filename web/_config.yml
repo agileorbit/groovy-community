@@ -1,0 +1,13 @@
+# Site settings
+title: Groovy Community Slack
+email: admin@groovycommunity.com
+description: > #
+  An open and safe community
+  for the Groovy ecosystem.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://groovycommunity.com" # the base hostname & protocol for your site
+twitter_username:
+github_username:
+
+# Build settings
+markdown: kramdown
