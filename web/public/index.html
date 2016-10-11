@@ -55,9 +55,9 @@
           <textarea rows="3" class="form-control" id="about" name="about" placeholder="Tell us a little about yourself"></textarea>
         </div>
 
-        <input type="hidden" name="redirect_uri" value="/success_signup.html">
+        <input type="hidden" name="redirect_uri" value="https://groovycommunity.com/success_signup.html">
         <input type="hidden" name="team_id" value="T2LNDB8SG">
-        
+
         <div class="checkbox" id="coc-container">
           <label>
             <input type="checkbox" name="coc" id="coc"> By checking here you agree to the <a href="https://github.com/agileorbit/groovy-community/blob/master/coc.md" target="_blank">Code of Conduct</a>
@@ -87,7 +87,7 @@ function formValidator() {
   var err = false;
   for (idx in required_fields) {
     var field = required_fields[idx];
-    var elem = document.querySelector('#' + field); 
+    var elem = document.querySelector('#' + field);
     var container = document.querySelector('#' + field + '-container');
     if (elem.type === "text" || elem.type === "textarea") {
       var val = elem.value ? elem.value.trim() : null;
