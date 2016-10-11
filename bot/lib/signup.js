@@ -4,11 +4,20 @@ const bluebird = require('bluebird')
 const qs = require('querystring')
 const chat = bluebird.promisifyAll(slack.chat)
 
+const required_fields = ['name', 'email', 'about', 'coc'];
 const signup_channel = process.env.SLACK_SIGNUPS_CHANNEL || 'admin-signups'
+
 
 module.exports = function (req, res, next) {
   console.log('got an signup request!', req.body)
   const params = qs.parse(req.body)
+
+  const errors = validateFields(params);
+  if (errors.length > 0) {
+    res.send(400, errors);
+    return;
+  }
+
   const client = storage()
   return client.hgetAsync('teams', params.team_id).then(function (json) {
     if (!json) {
@@ -46,6 +55,17 @@ module.exports = function (req, res, next) {
       next()
     })
   })
+}
+
+
+function validateFields (params) {
+  var errors = [];
+  for (field in required_fields) {
+    if (!params.hasOwnProperty(field)) {
+      errors.push({ field: field, required: true });
+    }
+  }
+  return errors;
 }
 
 function composeMessage (token, params) {

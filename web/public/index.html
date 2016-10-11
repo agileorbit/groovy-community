@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Groovy Community</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="clippy" style="display: block; width: 124px; height: 93px; background: url(&quot;https://s3.amazonaws.com/clippy.js/Agents/Clippy/map.png&quot;) -248px -3069px no-repeat; position: fixed; bottom: 10px; right: 10px;"></div>
+    <div class="clippy-notes" style="display: block;width: 200px;height: 100px;position: fixed;bottom: 75px;right: 100px;border: 1px solid;background: #f8f6c7;border-radius: 10px; padding: 5px;">
+      <span style="font-size: 11px; color: black">Hey there! It looks like you want to join the Groovy Community Slack! We verify all invitation requests, so the more information you give, the better!</span>
+    </div>
+    <header>
+      <div class="brand"></div>
+    </header>
+    <div class="container" id="main">
+      <form action="https://bot.groovycommunity.com/signup" method="POST">
+        <h3>Invitation to Groovy Community Slack</h3>
+        <div class="form-group">
+          <label class="sr-only" for="name">Name</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-user"></i></div>
+            <input type="text" class="form-control" id="name" name="name" placeholder="First and Last Name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="email">Email Address</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+            <input type="text" class="form-control" id="email" name="email" placeholder="Email Address">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="twitter">Twitter</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+            <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter (optional)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="github">Github</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-github"></i></div>
+            <input type="text" class="form-control" id="github" name="github" placeholder="Github (optional)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="about">A little about yourself</label>
+          <textarea rows="3" class="form-control" id="about" name="about" placeholder="Tell us a little about yourself"></textarea>
+        </div>
+
+        <input type="hidden" name="redirect_uri" value="signup_success.html">
+        <input type="hidden" name="team_id" value="T2LNDB8SG">
+        
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="coc"> By checking here you agree to the <a href>Code of Conduct</a> and <a href>Enforcement Policy</a>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+</body>
+</html>
