@@ -10,7 +10,7 @@
 <body>
     <div class="clippy" style="display: block; width: 124px; height: 93px; background: url(&quot;https://s3.amazonaws.com/clippy.js/Agents/Clippy/map.png&quot;) -248px -3069px no-repeat; position: fixed; bottom: 10px; right: 10px;"></div>
     <div class="clippy-notes" style="display: block;width: 200px;height: 100px;position: fixed;bottom: 75px;right: 100px;border: 1px solid;background: #f8f6c7;border-radius: 10px; padding: 5px;">
-      <span style="font-size: 11px; color: black">Hey there! It looks like you want to join the Groovy Community Slack! We verify all invitation requests, so the more information you give, the better!</span>
+      <span id="clippy-text" style="font-size: 11px; color: black">Hey there! It looks like you want to join the Groovy Community Slack! We verify all invitation requests, so the more information you give, the better!</span>
     </div>
     <header>
       <div class="brand"></div>
@@ -69,6 +69,7 @@
     </div>
 
 <script type="text/javascript">
+var clippyText = document.querySelector("#clippy-text");
 var form = document.querySelector("form");
 var handler = form.submit;
 var required_fields = ['name', 'email', 'about', 'coc'];
@@ -105,7 +106,9 @@ function formValidator() {
       }
     }
   }
-  if (!err) {
+  if (err) {
+    clippyText.innerHTML = "You need to fill out all the required fields";
+  } else {
     form.submit();
   }
 }
