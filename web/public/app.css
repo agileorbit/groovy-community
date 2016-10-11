@@ -44,6 +44,10 @@ header {
   font-size: 2rem;
 }
 
+#main.coc {
+  margin-bottom: 200px;
+}
+
 .extra-thanks {
   margin-top: 45px;
 }
@@ -54,4 +58,8 @@ html {
   background-image: -o-linear-gradient(270deg, #286b86, #eee);
   background-image: -moz-linear-gradient(270deg, #286b86, #eee);
   background-image: linear-gradient(180deg, #286b86, #eee);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
