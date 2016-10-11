@@ -5,6 +5,7 @@ const qs = require('querystring')
 const chat = bluebird.promisifyAll(slack.chat)
 
 const required_fields = ['name', 'email', 'about', 'coc'];
+const re_rfc5322 = /([A-Z0-9a-z._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]{2,6})/;
 const signup_channel = process.env.SLACK_SIGNUPS_CHANNEL || 'admin-signups'
 
 
@@ -61,8 +62,10 @@ module.exports = function (req, res, next) {
 function validateFields (params) {
   var errors = [];
   for (field in required_fields) {
-    if (!params.hasOwnProperty(field)) {
-      errors.push({ field: field, required: true });
+    if (!params.hasOwnProperty(field) || !params[field] || !params[field].trim().length > 0) {
+      errors.push({ field: field, required: true, error: "Field is empty" });
+    } else if (field == 'email' && !re_rfc5322.test(params[field])) {
+      errors.push({ field: field, required: true, error: "Email failed RFC5322 validation" });
     }
   }
   return errors;
