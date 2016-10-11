@@ -18,6 +18,8 @@ module.exports = function (req, res, next) {
     res.send(400, errors);
     return;
   }
+ 
+  params.email = cleanseEmail(params); 
 
   const client = storage()
   return client.hgetAsync('teams', params.team_id).then(function (json) {
@@ -69,6 +71,10 @@ function validateFields (params) {
     }
   }
   return errors;
+}
+
+function cleanseEmail (params) {
+  return params.email.match(re_rfc5322)[0];
 }
 
 function composeMessage (token, params) {
