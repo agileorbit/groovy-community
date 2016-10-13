@@ -87,11 +87,11 @@ function composeMessage (token, params) {
       title: params.email,
       fields: [{
         title: 'Twitter',
-        value: params.twitter,
+        value: '<https://twitter.com/' + params.twitter + '|' + params.twitter + '>',
         short: true
       }, {
         title: 'GitHub',
-        value: params.github,
+        value: '<https://github.com/' + params.github + '|' + params.github + '>',
         short: true
       }],
       author_name: params.name,
