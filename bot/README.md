@@ -25,7 +25,6 @@ Groovy Community Slack Team ID: T2LNDB8SG
    1. `VERIFICATION_TOKEN` - from Slack App
    1. `SLACK_ADMIN_CHANNEL` - channel to send notifications of `/admins` messages to.
    1. `SLACK_SIGNUPS_CHANNEL` - channel to send signup notifications to.
-   1. `SLACK_INVITE_TOKEN` - an administrator's Slack API token (apps can't do invites apparently)
    1. `REDISCLOUD_URL` - connection string for redis
 1. Install the app into the community by going to `https://<url>/install`
    1. Select the Slack Team
