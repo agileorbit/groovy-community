@@ -20,6 +20,7 @@ const scopes = [
   'bot',
   'channels:history',
   'channels:read',
+  'client',
   'emoji:read',
   'groups:read',
   'reactions:read',
