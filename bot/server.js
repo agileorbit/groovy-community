@@ -14,6 +14,8 @@ const server = restify.createServer()
 server.use(restify.bodyParser())
 
 const scopes = [
+  'client',
+  'admin',
   'incoming-webhook',
   'commands',
   'bot',
