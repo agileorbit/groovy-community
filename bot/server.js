@@ -16,16 +16,7 @@ server.use(restify.bodyParser())
 const scopes = [
   'incoming-webhook',
   'commands',
-  'admin',
   'bot',
-  'channels:history',
-  'channels:read',
-  'client',
-  'emoji:read',
-  'groups:read',
-  'reactions:read',
-  'reactions:write',
-  'users:read',
   'chat:write:user'
 ]
 
