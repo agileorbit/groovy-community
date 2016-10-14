@@ -30,32 +30,46 @@ module.exports = function (req, res, next) {
     const team = JSON.parse(json)
     const token = team.bot.bot_access_token
     if (!token) throw new Error('no token for that team')
-    return client.hsetAsync(
-      `signups-${params.team_id}`,
-      params.email,
-      JSON.stringify({
-        email: params.email,
-        name: params.name,
-        twitter: params.twitter,
-        github: params.github,
-        about: params.about
-      })
-    ).then(function () {
-      client.quit()
-      const msg = composeMessage(token, params)
-      return chat.postMessageAsync(msg)
-    }).then(function () {
-      if (!params.redirect_uri) {
-        res.send(200, 'signup request sent')
+    return client.smembersAsync(
+      `signup-filters-${params.team_id}`
+    ).then(function (filters) {
+      if (filters.length > 0 && filters.some(function(filter) {
+        return params.email.match(filter)
+      })) {
+        console.log(`${params.email} was filtered: [${filters}]`)
+        res.send(401, {
+          msg: `Sorry, but ${params.email} appears to be associated with violating the Groovy Community Code of Conduct. This signup request will not be processed.`
+        })
         next()
       } else {
-        res.redirect(params.redirect_uri, next)
+        return client.hsetAsync(
+          `signups-${params.team_id}`,
+          params.email,
+          JSON.stringify({
+            email: params.email,
+            name: params.name,
+            twitter: params.twitter,
+            github: params.github,
+            about: params.about
+          })
+        ).then(function () {
+          client.quit()
+          const msg = composeMessage(token, params)
+          return chat.postMessageAsync(msg)
+        }).then(function () {
+          if (!params.redirect_uri) {
+            res.send(200, 'signup request sent')
+            next()
+          } else {
+            res.redirect(params.redirect_uri, next)
+          }
+        }).catch(function (err) {
+          res.send(500, {
+            msg: err.message
+          })
+          next()
+        })
       }
-    }).catch(function (err) {
-      res.send(500, {
-        msg: err.message
-      })
-      next()
     })
   })
 }
@@ -87,11 +101,11 @@ function composeMessage (token, params) {
       title: params.email,
       fields: [{
         title: 'Twitter',
-        value: '<https://twitter.com/' + params.twitter + '|' + params.twitter + '>',
+        value: `<${params.twitter.startsWith('https://twitter.com') ? params.twitter : 'https://twitter.com/'+params.twitter}|${params.twitter}>`,
         short: true
       }, {
         title: 'GitHub',
-        value: '<https://github.com/' + params.github + '|' + params.github + '>',
+        value: `<${params.github.startsWith('https://github.com') ? params.github : 'https://github.com/'+params.github}|${params.github}>`,
         short: true
       }],
       author_name: params.name,
