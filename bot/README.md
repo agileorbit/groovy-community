@@ -15,7 +15,7 @@ Groovy Community Slack Team ID: T2LNDB8SG
    1. In the OAuth & Permissions section, enter the redirect URL as `https://<url>/oauth`
    1. In Bot Users, add a new bot user.
    1. In Interactive Messages, set Request URL as `https://<url>/button`
-   1. In Slach Commands, add the following:
+   1. In Slack Commands, add the following:
       1. `/admins` points to `https://<url>/admin`
       1. `/command` points to `https://<url>/command`
    1. Now go back to the Basic Info section and there should be a Verification Token field.
