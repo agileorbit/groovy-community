@@ -41,7 +41,7 @@ function launchBot (team_data) {
       return u.id
     }).forEach(function(id) {
       console.log("found admin with id", id)
-      client.hsetAsync(`admins-${team.id}`, id, true).then(function(hash) {})
+      client.hsetAsync("admins", id, true).then(function(hash) {})
     })
   })
   bot.message(function (event) {

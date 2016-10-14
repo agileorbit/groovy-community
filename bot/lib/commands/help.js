@@ -16,7 +16,7 @@ module.exports = function (data, cb) {
   } catch (e) {
     console.error(helpcommand, "does not specify help()")
     console.error(e)
-    cb(new Error(`no help available for ${helpcommand}`))
+    cb("no help available for " + helpcommand)
   }
   cb(null, {
     text: handler.help()
