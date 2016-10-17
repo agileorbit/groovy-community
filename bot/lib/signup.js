@@ -38,6 +38,8 @@ module.exports = function (req, res, next) {
         name: params.name,
         twitter: params.twitter,
         github: params.github,
+        linkedin: params.linkedin,
+        website: params.website,
         about: params.about
       })
     ).then(function () {
@@ -79,6 +81,13 @@ function cleanseEmail (params) {
 }
 
 function composeMessage (token, params) {
+  if(!params.twitter.includes('twitter.com')) {
+    params.twitter = '<https://twitter.com/' + params.twitter + '|' + params.twitter + '>'
+  }
+
+  if(!params.github.includes('github.com')) {
+    params.github = '<https://github.com/' + params.github + '|' + params.github + '>'
+  }
   return {
     token,
     channel: signup_channel,
@@ -87,11 +96,19 @@ function composeMessage (token, params) {
       title: params.email,
       fields: [{
         title: 'Twitter',
-        value: '<https://twitter.com/' + params.twitter + '|' + params.twitter + '>',
+        value: params.twitter,
         short: true
       }, {
         title: 'GitHub',
-        value: '<https://github.com/' + params.github + '|' + params.github + '>',
+        value: params.github,
+        short: true
+      }, {
+        title: 'LinkedIn',
+        value: params.linkedin,
+        short:true
+      },{
+        title: 'Website',
+        value: params.website,
         short: true
       }],
       author_name: params.name,
