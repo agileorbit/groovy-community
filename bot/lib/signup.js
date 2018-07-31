@@ -4,10 +4,9 @@ const bluebird = require('bluebird')
 const qs = require('querystring')
 const chat = bluebird.promisifyAll(slack.chat)
 
-const required_fields = ['name', 'email', 'about', 'coc'];
+const required_fields = ['name', 'email', 'about', 'coc', 'question'];
 const re_rfc5322 = /([A-Z0-9a-z._%+-]+)@([A-Za-z0-9.-]+\.[A-Za-z]{2,6})/;
 const signup_channel = process.env.SLACK_SIGNUPS_CHANNEL || 'admin-signups'
-
 
 module.exports = function (req, res, next) {
   console.log('got an signup request!', req.body)
@@ -62,15 +61,16 @@ module.exports = function (req, res, next) {
   })
 }
 
-
 function validateFields (params) {
   var errors = [];
   for (idx in required_fields) {
     var field = required_fields[idx];
     if (!Object.prototype.hasOwnProperty.call(params, field) || !params[field] || !params[field].trim().length > 0) {
       errors.push({ field: field, required: true, error: "Field is empty" });
-    } else if (field == 'email' && !re_rfc5322.test(params[field])) {
+    } else if (field === 'email' && !re_rfc5322.test(params[field])) {
       errors.push({ field: field, required: true, error: "Email failed RFC5322 validation" });
+    } else  if (field === 'question' && params[field].trim() !== '42') {
+      errors.push({ field: field, required: true, error: "Check your arithmetic" });
     }
   }
   return errors;
@@ -81,11 +81,11 @@ function cleanseEmail (params) {
 }
 
 function composeMessage (token, params) {
-  if(!params.twitter.includes('twitter.com')) {
+  if (!params.twitter.includes('twitter.com')) {
     params.twitter = '<https://twitter.com/' + params.twitter + '|' + params.twitter + '>'
   }
 
-  if(!params.github.includes('github.com')) {
+  if (!params.github.includes('github.com')) {
     params.github = '<https://github.com/' + params.github + '|' + params.github + '>'
   }
   return {

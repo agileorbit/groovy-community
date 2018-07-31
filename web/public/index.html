@@ -89,6 +89,14 @@
           </label>
         </div>
 
+        <div class="form-group" id="question-container">
+          <label class="sr-only" for="question">Question</label>
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-question"></i></div>
+            <input type="text" class="form-control" id="question" name="question" placeholder="40 + 2 =">
+          </div>
+        </div>
+
         <button type="submit" class="btn btn-default">Submit</button>
         <p style="margin-top:50px;">Please note: This community is a privately run community and is not affiliated with the official Apache Groovy project.</p>
       </form>
@@ -98,7 +106,7 @@
 var clippyText = document.querySelector("#clippy-text");
 var form = document.querySelector("form");
 var handler = form.submit;
-var required_fields = ['name', 'email', 'about', 'coc'];
+var required_fields = ['name', 'email', 'about', 'coc', 'question'];
 
 function clearFieldErr (container) {
   container.style.border = "";
