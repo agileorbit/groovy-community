@@ -16,7 +16,7 @@ module.exports = function (req, res, next) {
     var field = required_fields[idx];
     if (Object.prototype.hasOwnProperty.call(params, field) && params[field].toLowerCase().includes('groovycommunity.com')) {
       console.log('yet another bot.')
-      res.status(204).send();
+      res.send(204);
       return;
     }
   }
