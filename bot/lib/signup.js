@@ -12,6 +12,15 @@ module.exports = function (req, res, next) {
   console.log('got an signup request!', req.body)
   const params = qs.parse(req.body)
 
+  for (idx in required_fields) {
+    var field = required_fields[idx];
+    if (Object.prototype.hasOwnProperty.call(params, field) && params[field].toLowerCase().includes('groovycommunity.com')) {
+      console.log('yet another bot.')
+      res.status(204).send();
+      return;
+    }
+  }
+
   const errors = validateFields(params);
   if (errors.length > 0) {
     res.send(400, errors);
